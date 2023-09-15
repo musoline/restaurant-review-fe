@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a {
+  color: #5c69b6;
+  &:hover {
+    color: #3f51b5;
+  }
+}
+
+.r-form {
+  form {
+    .meta {
+      display: flex;
+      justify-content: flex-end;
+      a {
+        padding-bottom: 30px;
+        text-align: right;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+div.container {
+  width: 1020px;
+  margin: 0 auto;
+  padding-top: 20px;
+
+  &.restaurants {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  .item {
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
