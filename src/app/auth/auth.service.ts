@@ -12,7 +12,7 @@ import { TUser } from '../types/TUser';
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = 'http://localhost:3000/auth';
+  endpoint: string = 'https://api.shoufle.ge/auth';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   constructor(private httpClient: HttpClient, public router: Router) { }

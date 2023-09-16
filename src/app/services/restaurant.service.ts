@@ -7,11 +7,13 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class RestaurantService {
+  endpoint: string = `http://api.shoufle.ge/api/restaurant`
+
   constructor(private httpClient: HttpClient) { }
 
   create(restaurant: TRestaurant) {
     this.httpClient
-      .post('http://localhost:3000/api/restaurant', restaurant)
+      .post(`${this.endpoint}`, restaurant)
       .subscribe((res) => {
         console.log(res);
       });
@@ -19,14 +21,14 @@ export class RestaurantService {
 
   getAll(): Observable<any> {
     return this.httpClient
-      .get<TRestaurant>(`http://localhost:3000/api/restaurant`)
+      .get<TRestaurant>(`${this.endpoint}`)
       .pipe(catchError(this.handleError));
 
   }
 
   getById(restaurantId: number): Observable<any> {
     return this.httpClient
-      .get(`http://localhost:3000/api/restaurant/${restaurantId}`)
+      .get(`${this.endpoint}/${restaurantId}`)
       .pipe(catchError(this.handleError))
   }
 

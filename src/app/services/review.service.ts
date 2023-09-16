@@ -7,7 +7,7 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ReviewService {
-  api: string = "http://localhost:3000/api/review"
+  api: string = "https://api.shoufle.ge/api/review"
   constructor(private httpClient: HttpClient) { }
 
   create(review: TReview): Observable<any> {
