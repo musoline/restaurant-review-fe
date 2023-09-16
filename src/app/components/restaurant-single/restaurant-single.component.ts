@@ -29,9 +29,8 @@ export class RestaurantSingleComponent implements OnInit {
       this.restaurant = res
     })
 
-    this.reviewService.getAllWithUser(this.id).subscribe(res => { 
-      this.reviews = res 
-      console.log(this.reviews)
+    this.reviewService.getAllWithUser(this.id).subscribe(res => {
+      this.reviews = res
     })
   }
 }

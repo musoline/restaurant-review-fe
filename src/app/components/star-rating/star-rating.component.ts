@@ -7,7 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class StarRatingComponent implements OnInit {
   @Input() maxRating = 5;
-  @Input() selectedStar: number = 0
+  @Input() selectedStar: number | undefined = 0
+  @Input() disabled: boolean = false
   @Output()
   onRate: EventEmitter<number> = new EventEmitter<number>();
   maxRatingArr: any = [];
@@ -17,10 +18,13 @@ export class StarRatingComponent implements OnInit {
   }
 
   handleMouseEnter(index: number) {
+    if (this.disabled) return
     this.selectedStar = index + 1
   }
 
   handleMouseLeave() {
+    if (this.disabled) return
+
     if (this.previousSelection !== 0) {
       this.selectedStar = this.previousSelection
     } else {
@@ -29,6 +33,8 @@ export class StarRatingComponent implements OnInit {
   }
 
   rate(index: number) {
+    if (this.disabled) return
+
     this.selectedStar = index + 1;
     this.previousSelection = this.selectedStar
     this.onRate.emit(this.selectedStar)

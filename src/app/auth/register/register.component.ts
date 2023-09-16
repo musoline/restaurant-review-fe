@@ -15,18 +15,18 @@ export class RegisterComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
   registerForm = this.formBuilder.group({
     name: this.formBuilder.control('Nika', [Validators.required]),
-    email: this.formBuilder.control('Nika123@gmail.com', [
+    email: this.formBuilder.control('nika123@gmail.com', [
       Validators.required,
       Validators.email,
     ]),
-    password: this.formBuilder.control('U!pn$xZnvi68iBt', [
+    password: this.formBuilder.control('', [
       Validators.required,
       Validators.pattern(
-        '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%?&.])[A-Za-z\d$@$!%?&.]{8,}$/gm
       ),
     ]),
   });

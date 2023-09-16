@@ -1,48 +1,19 @@
-<mat-toolbar color="primary">
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
-    (click)="drawer.toggle()"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
+<main [ngClass]="{'noAuth':!authService.isLoggedIn}">
 
-  <span class="spacer"></span>
+  <header *ngIf="authService.isLoggedIn" class="header">
+    <div class="container">
+      <div><a routerLink="/restaurant"><img src="../assets/images/logo.png" alt="logo"></a></div>
+      <nav>
+        <ul>
+          <li><a routerLink="/restaurant">Restaurants</a></li>
+          <li><a routerLink="/review">Reviews</a></li>
+          <li><a><button (click)="logout()">Logout</button></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <a *ngIf="!this.authService.isLoggedIn" routerLink="/login" class="nav-link">
-    <button
-      mat-icon-button
-      class="example-icon favorite-icon"
-      aria-label="Example icon-button with heart icon"
-    >
-      <mat-icon>login</mat-icon>
-    </button>
-  </a>
-
-  <button
-    (click)="logout()"
-    *ngIf="this.authService.isLoggedIn"
-    mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon>logout</mat-icon>
-  </button>
-
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with share icon"
-  >
-    <mat-icon>share</mat-icon>
-  </button>
-</mat-toolbar>
-
-<mat-drawer-container class="example-container" hasBackdrop="true">
-  <mat-drawer #drawer mode="over">I'm a drawer</mat-drawer>
-  <mat-drawer-content>
+  <div class="container">
     <router-outlet></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
+  </div>
+</main>

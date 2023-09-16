@@ -14,6 +14,9 @@ export class ReviewService {
     return this.httpClient.post<TReview>(`${this.api}`, review).pipe(catchError(this.handleError))
   }
 
+  getAll(): Observable<any> {
+    return this.httpClient.get(`${this.api}`).pipe(catchError(this.handleError))
+  }
 
   getAllWithUser(id: number): Observable<any> {
     return this.httpClient.get<number>(`${this.api}/${id}`).pipe(catchError(this.handleError))

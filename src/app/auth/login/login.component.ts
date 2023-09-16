@@ -13,7 +13,7 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService
-  ) {}
+  ) { }
 
   loginForm = this.formBuilder.group({
     email: this.formBuilder.control('', [
@@ -22,9 +22,9 @@ export class LoginComponent {
     ]),
     password: this.formBuilder.control('', [
       Validators.required,
-      Validators.pattern(
-        '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
-      ),
+      // Validators.pattern(
+      //   "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+      // ),
     ]),
   });
 

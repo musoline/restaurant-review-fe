@@ -1,0 +1,45 @@
+.user-review {
+    margin-bottom: 40px;
+    background-color: #F3F3F3;
+    border-radius: 2em;
+    height: 300px;
+    position: relative;
+    padding: 50px;
+
+    .user-profile {
+        top: -35px;
+        left: 30px;
+        position: absolute;
+
+        img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+        }
+    }
+
+    app-star-rating {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        transform: scale(.8);
+    }
+
+    .user-name {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .user-comment {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .user-visit-date {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+}

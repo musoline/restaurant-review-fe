@@ -7,16 +7,18 @@ import { AuthGuard } from './auth/guards/auth.guard';
 import { RestaurantComponent } from './pages/restaurant/restaurant.component';
 import { RestaurantReviewComponent } from './components/restaurant-review/restaurant-review.component';
 import { RestaurantSingleComponent } from './components/restaurant-single/restaurant-single.component';
+import { LoggedInAuthGuard } from './auth/guards/logged-in-auth.guard';
+import { ReviewComponent } from './pages/review/review.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [LoggedInAuthGuard] },
   {
     path: 'restaurant',
     component: RestaurantComponent,
     canActivate: [AuthGuard],
   },
+  { path: '', redirectTo: "/restaurant", pathMatch: "full", },
   {
     path: "restaurant/:id",
     component: RestaurantSingleComponent,
@@ -25,6 +27,12 @@ const routes: Routes = [
   {
     path: 'rate-restaurant/:id',
     component: RestaurantReviewComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+
+    path: "review",
+    component: ReviewComponent,
     canActivate: [AuthGuard]
   }
 ];

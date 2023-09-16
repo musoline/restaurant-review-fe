@@ -30,6 +30,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { LoggedInAuthGuard } from './auth/guards/logged-in-auth.guard';
+import { ReviewComponent } from './pages/review/review.component';
+import { SingleReviewComponent } from './components/single-review/single-review.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +43,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     RestaurantComponent,
     StarRatingComponent,
     RestaurantReviewComponent,
-    RestaurantSingleComponent
+    RestaurantSingleComponent,
+    ReviewComponent,
+    SingleReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +75,7 @@ import { MatNativeDateModule } from '@angular/material/core';
       useClass: AuthInterceptor,
       multi: true,
     },
+    AuthGuard, LoggedInAuthGuard
   ],
   bootstrap: [AppComponent],
 })

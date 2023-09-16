@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { TRestaurant } from 'src/app/types/TRestaurant';
@@ -18,7 +18,8 @@ export class RestaurantReviewComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private restaurantService: RestaurantService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private router: Router
 
   ) {
     this.id = Number(this.activeRoute.snapshot.paramMap.get("id"));
@@ -32,7 +33,7 @@ export class RestaurantReviewComponent implements OnInit {
 
   reviewForm = this.formBuilder.group({
     comment: this.formBuilder.control("this is comment", [Validators.required]),
-    star: this.formBuilder.control(5, [Validators.required]),
+    star: this.formBuilder.control(0, [Validators.required]),
     restaurantId: this.formBuilder.control(0, [Validators.required]),
     date_visit: this.formBuilder.control('', [Validators.required])
   })
@@ -45,8 +46,15 @@ export class RestaurantReviewComponent implements OnInit {
   proceed() {
     this.reviewForm.controls['restaurantId'].setValue(this.id);
 
-    if (this.reviewForm.valid) {
-      this.reviewService.create(this.reviewForm.value as TReview).subscribe(res => { if(res){} })
+    if (this.reviewForm.valid && this.reviewForm.get("star")!.value! > 0) {
+
+      this.reviewService.create(this.reviewForm.value as TReview).subscribe(res => {
+        if (res) {
+          this.router.navigate([`/restaurant/${this.id}`])
+        }
+      })
+    } else {
+
     }
   }
 }

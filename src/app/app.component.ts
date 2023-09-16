@@ -9,7 +9,7 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   title = 'restaurant-review-fe';
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService) { }
   logout() {
     this.authService.doLogout();
   }

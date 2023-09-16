@@ -1,0 +1,7 @@
+<div class="user-review">
+    <div class="user-profile"><img src="../../../assets/images/user.png" alt=""></div>
+    <app-star-rating [selectedStar]="review.star" [disabled]="true"></app-star-rating>
+    <div class="user-name">{{review.userName}}</div>
+    <div class="user-comment">{{review.comment}}</div>
+    <div class="user-visit-date">{{review.visitDate | date}}</div>
+</div>

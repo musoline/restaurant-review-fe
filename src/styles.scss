@@ -1,10 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -12,8 +17,52 @@ body {
 
 a {
   color: #5c69b6;
+
   &:hover {
     color: #3f51b5;
+  }
+}
+
+main {
+  padding-top: 30px;
+  width: 100%;
+  min-height: 100vh;
+
+  &.noAuth {
+    height: 100vh;
+
+    .container {
+      height: 100%;
+
+      app-login,
+      app-register {
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .auth-form {
+          width: 400px;
+          min-height: 400px;
+          background-color: #E7D2D2;
+          padding: 30px;
+          border-radius: 2em;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+
+          h2 {
+            text-align: center;
+          }
+
+          form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -22,6 +71,7 @@ a {
     .meta {
       display: flex;
       justify-content: flex-end;
+
       a {
         padding-bottom: 30px;
         text-align: right;
@@ -34,7 +84,6 @@ a {
 div.container {
   width: 1020px;
   margin: 0 auto;
-  padding-top: 20px;
 
   &.restaurants {
     // display: grid;
@@ -47,4 +96,11 @@ div.container {
     margin-left: 10px;
     margin-right: 10px;
   }
+}
+
+.user-reviews {
+  margin-top: 150px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
 }

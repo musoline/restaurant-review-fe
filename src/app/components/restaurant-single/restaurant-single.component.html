@@ -1,14 +1,36 @@
-<div>
-    Restaurant id:{{restaurant.id}}<br>
-    Restaurant Name:{{restaurant.name}}<br>
-    Restaurant Rating:{{restaurant.rating}}<br>
+<div class="restaurant">
+    <figure>
+        <img src="../../../assets/images/restaurant.png" alt="">
+    </figure>
+    <div class="restaurant-meta">
+        <h2 class="restaurant-title">{{restaurant.name}}</h2>
+        <p class="restaurant-about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum vero eos eveniet
+            asperiores at iste, aperiam sequi in iure quae voluptate, exercitationem ratione pariatur explicabo
+            temporibus tenetur nobis, perspiciatis alias? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Necessitatibus aliquid sapiente magnam ad laudantium ducimus veritatis quod illo, quo odit, sequi tenetur
+            dicta fugit aliquam quos distinctio praesentium, dolorem tempore. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Modi, tempora.</p>
 
+        <div class="rating">
+            <app-star-rating [selectedStar]="restaurant.rating" [disabled]="true"></app-star-rating>
+            <span>{{restaurant.rating | number}}/5</span>
+
+
+            <a routerLink="/rate-restaurant/{{restaurant.id}}"><button mat-raised-button>Rate </button> </a>
+        </div>
+    </div>
 </div>
 
-<div>
-    <div *ngFor="let review of reviews; let index = index">
-        review id: {{review.id}}
-        comment: {{review.comment}}
-        star: {{review.star}}
-    </div>
+
+<div class="user-reviews">
+
+    <app-single-review *ngFor=" let review of reviews; let index=index" [review]="review"></app-single-review>
+
+    <!-- <div *ngFor=" let review of reviews; let index=index" class="user-review">
+        <div class="user-profile"><img src="../../../assets/images/user.png" alt=""></div>
+        <app-star-rating [selectedStar]="review.star" [disabled]="true"></app-star-rating>
+        <div class="user-name">{{review.userName}}</div>
+        <div class="user-comment">{{review.comment}}</div>
+        <div class="user-visit-date">{{review.visitDate | date}}</div>
+    </div> -->
 </div>
