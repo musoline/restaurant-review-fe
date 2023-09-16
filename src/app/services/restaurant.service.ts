@@ -7,7 +7,7 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class RestaurantService {
-  endpoint: string = `http://api.shoufle.ge/api/restaurant`
+  endpoint: string = `https://api.shoufle.ge/api/restaurant`
 
   constructor(private httpClient: HttpClient) { }
 
