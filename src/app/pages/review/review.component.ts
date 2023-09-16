@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ESnackBarStatus } from 'src/app/enums/ESnackBarStatus';
 import { ReviewService } from 'src/app/services/review.service';
 import { TReview } from 'src/app/types/TReview';
 
@@ -13,8 +14,13 @@ export class ReviewComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.reviewService.getAll().subscribe(res => {
-      this.reviews = res
+    this.reviewService.getAll().subscribe({
+      next: res => {
+        this.reviews = res
+      },
+      error: err => {
+        this.reviewService.notifyService.openSnackBar(err.message, "close", ESnackBarStatus.ERROR)
+      }
     })
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ESnackBarStatus } from 'src/app/enums/ESnackBarStatus';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { TRestaurant } from 'src/app/types/TRestaurant';
@@ -26,8 +27,13 @@ export class RestaurantReviewComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.restaurantService.getById(this.id).subscribe(res => {
-      this.restaurant = res
+    this.restaurantService.getById(this.id).subscribe({
+      next: res => {
+        this.restaurant = res
+      },
+      error: err => {
+        this.restaurantService.notifyService.openSnackBar(err.message, "close", ESnackBarStatus.ERROR)
+      }
     })
   }
 
@@ -48,9 +54,15 @@ export class RestaurantReviewComponent implements OnInit {
 
     if (this.reviewForm.valid && this.reviewForm.get("star")!.value! > 0) {
 
-      this.reviewService.create(this.reviewForm.value as TReview).subscribe(res => {
-        if (res) {
-          this.router.navigate([`/restaurant/${this.id}`])
+      this.reviewService.create(this.reviewForm.value as TReview).subscribe({
+        next: res => {
+          if (res) {
+            this.restaurantService.notifyService.openSnackBar("Review Created", "close", ESnackBarStatus.SUCCESS)
+            this.router.navigate([`/restaurant/${this.id}`])
+          }
+        },
+        error: err => {
+          this.restaurantService.notifyService.openSnackBar(err.message, "close", ESnackBarStatus.ERROR)
         }
       })
     } else {

@@ -4,6 +4,7 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
 import { TRestaurant } from 'src/app/types/TRestaurant';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ESnackBarStatus } from 'src/app/enums/ESnackBarStatus';
 
 @Component({
   selector: 'app-restaurant',
@@ -22,10 +23,15 @@ export class RestaurantComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.restaurantService.getAll().subscribe((res) => {
-      this.restaurants = res;
-      this.dataSource = new MatTableDataSource<TRestaurant>(this.restaurants);
-      this.dataSource.sort = this.sort;
+    this.restaurantService.getAll().subscribe({
+      next: (res) => {
+        this.restaurants = res;
+        this.dataSource = new MatTableDataSource<TRestaurant>(this.restaurants);
+        this.dataSource.sort = this.sort;
+      },
+      error: err => {
+        this.restaurantService.notifyService.openSnackBar(err.message, "close", ESnackBarStatus.ERROR)
+      }
     });
   }
 
