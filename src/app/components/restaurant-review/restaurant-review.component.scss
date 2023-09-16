@@ -19,27 +19,3 @@
 
 
 
-.review-form {
-    width: 400px;
-    min-height: 400px;
-    background-color: #E7D2D2;
-    padding: 30px;
-    border-radius: 2em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-    h2 {
-        text-align: center;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-
-        app-star-rating {
-            margin-bottom: 20px;
-        }
-    }
-}
