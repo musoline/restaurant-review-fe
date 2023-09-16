@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./breakpoints";
 
 * {
   box-sizing: border-box;
@@ -51,6 +52,10 @@ main {
           flex-direction: column;
           justify-content: space-around;
 
+          @include md {
+            width: 100%;
+          }
+
           h2 {
             text-align: center;
           }
@@ -84,6 +89,23 @@ main {
 div.container {
   width: 1020px;
   margin: 0 auto;
+
+
+  @include xl {
+    width: 900px;
+  }
+
+  @include lg {
+    width: 700px;
+  }
+
+  @include md {
+    width: 450px;
+  }
+
+  @include sm {
+    width: 100%;
+  }
 
   &.restaurants {
     // display: grid;
