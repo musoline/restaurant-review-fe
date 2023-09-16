@@ -5,6 +5,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { RestaurantComponent } from './pages/restaurant/restaurant.component';
+import { RestaurantReviewComponent } from './components/restaurant-review/restaurant-review.component';
+import { RestaurantSingleComponent } from './components/restaurant-single/restaurant-single.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -15,10 +17,20 @@ const routes: Routes = [
     component: RestaurantComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: "restaurant/:id",
+    component: RestaurantSingleComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'rate-restaurant/:id',
+    component: RestaurantReviewComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

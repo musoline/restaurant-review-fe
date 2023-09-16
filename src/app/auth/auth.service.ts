@@ -15,7 +15,7 @@ export class AuthService {
   endpoint: string = 'http://localhost:3000/auth';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
-  constructor(private httpClient: HttpClient, public router: Router) {}
+  constructor(private httpClient: HttpClient, public router: Router) { }
 
   register(user: TUser): Observable<any> {
     let api = `${this.endpoint}/register`;
@@ -29,8 +29,6 @@ export class AuthService {
     return this.httpClient
       .post<any>(`${this.endpoint}/login`, user)
       .subscribe((res: any) => {
-        console.log(res);
-
         localStorage.setItem('jwt', res.jwt);
         this.router.navigate(['/restaurant']);
       });

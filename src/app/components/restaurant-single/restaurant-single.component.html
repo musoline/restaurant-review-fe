@@ -1,1 +1,14 @@
-<p>restaurant-single works!</p>
+<div>
+    Restaurant id:{{restaurant.id}}<br>
+    Restaurant Name:{{restaurant.name}}<br>
+    Restaurant Rating:{{restaurant.rating}}<br>
+
+</div>
+
+<div>
+    <div *ngFor="let review of reviews; let index = index">
+        review id: {{review.id}}
+        comment: {{review.comment}}
+        star: {{review.star}}
+    </div>
+</div>

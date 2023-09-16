@@ -37,8 +37,9 @@ div.container {
   padding-top: 20px;
 
   &.restaurants {
-    display: grid;
-    grid-template-columns: auto auto;
+    // display: grid;
+    // grid-template-columns: auto auto;
+    min-height: 90vh;
   }
 
   .item {

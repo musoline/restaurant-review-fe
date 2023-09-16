@@ -1,35 +1,23 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TRestaurant } from '../types/TRestaurant';
+import { TReview } from '../types/TReview';
 import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class RestaurantService {
+export class ReviewService {
+  api: string = "http://localhost:3000/api/review"
   constructor(private httpClient: HttpClient) { }
 
-  create(restaurant: TRestaurant) {
-    this.httpClient
-      .post('http://localhost:3000/api/restaurant', restaurant)
-      .subscribe((res) => {
-        console.log(res);
-      });
+  create(review: TReview): Observable<any> {
+    return this.httpClient.post<TReview>(`${this.api}`, review).pipe(catchError(this.handleError))
   }
 
-  getAll(): Observable<any> {
-    return this.httpClient
-      .get<TRestaurant>(`http://localhost:3000/api/restaurant`)
-      .pipe(catchError(this.handleError));
 
+  getAllWithUser(id: number): Observable<any> {
+    return this.httpClient.get<number>(`${this.api}/${id}`).pipe(catchError(this.handleError))
   }
-
-  getById(restaurantId: number): Observable<any> {
-    return this.httpClient
-      .get(`http://localhost:3000/api/restaurant/${restaurantId}`)
-      .pipe(catchError(this.handleError))
-  }
-
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

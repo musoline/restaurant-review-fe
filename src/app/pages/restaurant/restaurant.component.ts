@@ -13,13 +13,13 @@ import { MatTableDataSource } from '@angular/material/table';
 export class RestaurantComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   restaurants!: TRestaurant[];
-  displayedColumns: string[] = ['id', 'name', 'rating'];
+  displayedColumns: string[] = ['id', 'name', 'rating', "actions"];
   dataSource = new MatTableDataSource<TRestaurant>();
 
   constructor(
     private restaurantService: RestaurantService,
     private _liveAnouncer: LiveAnnouncer
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.restaurantService.getAll().subscribe((res) => {

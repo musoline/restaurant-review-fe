@@ -4,12 +4,7 @@
   <form class="example-form" [formGroup]="loginForm" (ngSubmit)="proceed()">
     <mat-form-field class="form-field-full-width">
       <mat-label>Enter your email</mat-label>
-      <input
-        matInput
-        placeholder="pat@example.com"
-        formControlName="email"
-        required
-      />
+      <input matInput placeholder="pat@example.com" formControlName="email" required />
       <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
     </mat-form-field>
 

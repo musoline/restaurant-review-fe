@@ -1,0 +1,23 @@
+<div class="review-form r-form">
+    <h2>Please Review {{restaurant.name}}</h2>
+
+    <form class="example-form" [formGroup]="reviewForm" (ngSubmit)="proceed()">
+        <mat-form-field class="form-field-full-width">
+            <mat-label>Please Enter Your Comment</mat-label>
+            <textarea matInput placeholder="Provide your Opinion..." formControlName="comment" required></textarea>
+            <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+        </mat-form-field>
+
+        <app-star-rating (onRate)="handleRate($event)"></app-star-rating>
+
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date_visit">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary">Submit</button>
+    </form>
+</div>

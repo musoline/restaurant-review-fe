@@ -11,6 +11,8 @@ import { AuthInterceptor } from './auth/interceptors/authconfig.interceptor';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { RestaurantReviewComponent } from './components/restaurant-review/restaurant-review.component';
 import { RestaurantSingleComponent } from './components/restaurant-single/restaurant-single.component';
 
 // Material Modules
@@ -25,6 +27,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +37,9 @@ import { MatTableModule } from '@angular/material/table';
     LoginComponent,
     HomeComponent,
     RestaurantComponent,
-    RestaurantSingleComponent,
+    StarRatingComponent,
+    RestaurantReviewComponent,
+    RestaurantSingleComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +59,9 @@ import { MatTableModule } from '@angular/material/table';
     MatProgressBarModule,
     MatSortModule,
     MatTableModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     {
@@ -62,4 +72,4 @@ import { MatTableModule } from '@angular/material/table';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
