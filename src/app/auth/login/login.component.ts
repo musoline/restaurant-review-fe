@@ -38,7 +38,12 @@ export class LoginComponent {
 
   proceed() {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value as TUser);
+      this.authService.login(this.loginForm.value as TUser)
+        .subscribe((res: any) => {
+          localStorage.setItem('jwt', res.jwt);
+          this.authService.router.navigate(['/restaurant']);
+        });
+      ;
 
       // console.log(this.loginForm.value);
       // this.httpClient

@@ -26,13 +26,9 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  login(user: TUser) {
+  login(user: TUser): Observable<any> {
     return this.httpClient
-      .post<any>(`${this.endpoint}/login`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('jwt', res.jwt);
-        this.router.navigate(['/restaurant']);
-      });
+      .post<TUser>(`${this.endpoint}/login`, user).pipe(catchError(this.handleError))
   }
   getToken() {
     return localStorage.getItem('jwt');
@@ -58,15 +54,17 @@ export class AuthService {
     );
   }
 
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.error('An error occurred:', error.error);
     } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
     }
-    return throwError(msg);
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
   }
 }

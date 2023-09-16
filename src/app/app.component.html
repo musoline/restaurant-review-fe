@@ -5,8 +5,8 @@
       <div><a routerLink="/restaurant"><img src="../assets/images/logo.png" alt="logo"></a></div>
       <nav>
         <ul>
-          <li><a routerLink="/restaurant">Restaurants</a></li>
-          <li><a routerLink="/review">Reviews</a></li>
+          <li><a routerLink="/restaurant" [routerLinkActive]="['is-active']">Restaurants</a></li>
+          <li><a routerLink="/review" [routerLinkActive]="['is-active']">Reviews</a></li>
           <li><a><button (click)="logout()">Logout</button></a></li>
         </ul>
       </nav>
