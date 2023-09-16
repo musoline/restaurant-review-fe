@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ESnackBarStatus } from 'src/app/enums/ESnackBarStatus';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { TRestaurant } from 'src/app/types/TRestaurant';
@@ -25,12 +26,22 @@ export class RestaurantSingleComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    this.restaurantService.getById(this.id).subscribe(res => {
-      this.restaurant = res
+    this.restaurantService.getById(this.id).subscribe({
+      next: res => {
+        this.restaurant = res
+      },
+      error: err => {
+        this.restaurantService.notifyService.openSnackBar(err.message, "close", ESnackBarStatus.ERROR)
+      }
     })
 
-    this.reviewService.getAllWithUser(this.id).subscribe(res => {
-      this.reviews = res
+    this.reviewService.getAllWithUser(this.id).subscribe({
+      next: res => {
+        this.reviews = res
+      },
+      error: err => {
+        this.reviewService.notifyService.openSnackBar(err.message, "close", ESnackBarStatus.ERROR)
+      }
     })
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { TRestaurant } from '../types/TRestaurant';
 import { Observable, catchError, throwError } from 'rxjs';
 import { localEnviromnemt } from '../constant';
+import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { localEnviromnemt } from '../constant';
 export class RestaurantService {
   endpoint: string = localEnviromnemt ? "http://localhost:3000/api/restaurant" : "https://api.shoufle.ge/api/restaurant"
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, public notifyService: NotifyService) { }
 
   create(restaurant: TRestaurant) {
     this.httpClient
@@ -34,6 +35,8 @@ export class RestaurantService {
   }
 
   private handleError(error: HttpErrorResponse) {
+    return throwError(() => error.error)
+
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);
