@@ -10,7 +10,7 @@ import { throwError } from 'rxjs';
 })
 export class NotifyService {
 
-  constructor(private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private snackBar: MatSnackBar) { }
 
 
   openSnackBar(message: string, action: string, status: TESnackBarStatus) {
@@ -22,9 +22,6 @@ export class NotifyService {
   }
 
   handleError(error: HttpErrorResponse) {
-    if (error.status === 401) {
-      this.router.navigate(['login']);
-    }
     return throwError(() => error.error)
   }
 }
