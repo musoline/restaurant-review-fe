@@ -7,12 +7,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { TUser } from '../types/TUser';
+import { localEnviromnemt } from '../constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = 'https://api.shoufle.ge/auth';
+  endpoint: string = localEnviromnemt ? "http://localhost:3000/auth" : "https://api.shoufle.ge/auth";
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   constructor(private httpClient: HttpClient, public router: Router) { }

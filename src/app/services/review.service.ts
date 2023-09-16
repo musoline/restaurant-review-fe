@@ -2,12 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TReview } from '../types/TReview';
 import { Observable, catchError, throwError } from 'rxjs';
+import { localEnviromnemt } from '../constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
-  api: string = "https://api.shoufle.ge/api/review"
+  api: string = localEnviromnemt ? "http://localhost:3000/api/review" : "https://api.shoufle.ge/api/review";
   constructor(private httpClient: HttpClient) { }
 
   create(review: TReview): Observable<any> {

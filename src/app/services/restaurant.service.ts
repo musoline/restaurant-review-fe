@@ -2,12 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TRestaurant } from '../types/TRestaurant';
 import { Observable, catchError, throwError } from 'rxjs';
+import { localEnviromnemt } from '../constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RestaurantService {
-  endpoint: string = `https://api.shoufle.ge/api/restaurant`
+  endpoint: string = localEnviromnemt ? "http://localhost:3000/api/restaurant" : "https://api.shoufle.ge/api/restaurant"
 
   constructor(private httpClient: HttpClient) { }
 
