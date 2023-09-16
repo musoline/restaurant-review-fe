@@ -6,6 +6,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ESnackBarStatus } from 'src/app/enums/ESnackBarStatus';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({
@@ -22,7 +23,7 @@ export class AuthGuard {
     | boolean
     | UrlTree {
     if (this.authService.isLoggedIn !== true) {
-      window.alert('Access not allowed!');
+      this.authService.notifyService.openSnackBar('Access not allowed!', "", ESnackBarStatus.ERROR);
       this.router.navigate(['login']);
     }
     return true;
