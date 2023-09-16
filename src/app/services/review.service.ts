@@ -1,47 +1,31 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TReview } from '../types/TReview';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { localEnviromnemt } from '../constant';
 import { NotifyService } from './notify.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
   api: string = localEnviromnemt ? "http://localhost:3000/api/review" : "https://api.shoufle.ge/api/review";
-  constructor(private httpClient: HttpClient, public notifyService: NotifyService) { }
+
+  constructor(private httpClient: HttpClient, public notifyService: NotifyService, public router: Router) { }
 
   create(review: TReview): Observable<any> {
-    return this.httpClient.post<TReview>(`${this.api}`, review).pipe(catchError(this.handleError))
+    return this.httpClient.post<TReview>(`${this.api}`, review).pipe(catchError(this.notifyService.handleError))
   }
 
   getAll(): Observable<any> {
-    return this.httpClient.get(`${this.api}`).pipe(catchError(this.handleError))
+    return this.httpClient.get(`${this.api}`).pipe(catchError(this.notifyService.handleError))
   }
 
   getAllWithUser(id: number): Observable<any> {
-    return this.httpClient.get<number>(`${this.api}/${id}`).pipe(catchError(this.handleError))
+    return this.httpClient.get<number>(`${this.api}/${id}`).pipe(catchError(this.notifyService.handleError))
   }
 
 
-  private handleError(error: HttpErrorResponse) {
-    return throwError(() => error.error)
 
-    if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, body was: `,
-        error.error
-      );
-    }
-    // Return an observable with a user-facing error message.
-    return throwError(
-      () => new Error('Something bad happened; please try again later.')
-    );
-  }
 }

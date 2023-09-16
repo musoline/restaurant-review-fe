@@ -14,7 +14,8 @@
         <div class="rating">
             <app-star-rating [selectedStar]="restaurant.rating" [disabled]="true"></app-star-rating>
             <span>{{restaurant.rating | number}}/5</span>
-
+            <span>Lowest:{{restaurant.lowest}}</span>
+            <span>Highest:{{restaurant.highest}}</span>
 
             <a routerLink="/rate-restaurant/{{restaurant.id}}"><button mat-raised-button>Rate </button> </a>
         </div>
@@ -26,11 +27,4 @@
 
     <app-single-review *ngFor=" let review of reviews; let index=index" [review]="review"></app-single-review>
 
-    <!-- <div *ngFor=" let review of reviews; let index=index" class="user-review">
-        <div class="user-profile"><img src="../../../assets/images/user.png" alt=""></div>
-        <app-star-rating [selectedStar]="review.star" [disabled]="true"></app-star-rating>
-        <div class="user-name">{{review.userName}}</div>
-        <div class="user-comment">{{review.comment}}</div>
-        <div class="user-visit-date">{{review.visitDate | date}}</div>
-    </div> -->
 </div>

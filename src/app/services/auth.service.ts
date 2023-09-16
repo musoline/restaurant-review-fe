@@ -25,13 +25,13 @@ export class AuthService {
     let api = `${this.endpoint}/register`;
     return this.httpClient
       .post<TUser>(api, user)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.notifyService.handleError));
   }
 
   login(user: TUser): Observable<any> {
     return this.httpClient
       .post<TUser>(`${this.endpoint}/login`, user)
-      .pipe(catchError(this.handleError))
+      .pipe(catchError(this.notifyService.handleError))
   }
   getToken() {
     return localStorage.getItem('jwt');
@@ -46,17 +46,5 @@ export class AuthService {
       this.router.navigate(['login']);
     }
   }
-
-
-
-
-  private handleError(error: HttpErrorResponse) {
-
-    return throwError(
-      () => error.error
-    );
-  }
-
-
 
 }
