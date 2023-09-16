@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TUser } from 'src/app/types/TUser';
+import { ESnackBarStatus } from 'src/app/enums/ESnackBarStatus';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +14,7 @@ export class RegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   registerForm = this.formBuilder.group({
@@ -31,14 +31,21 @@ export class RegisterComponent {
     ]),
   });
 
+
   proceed() {
     if (this.registerForm.valid) {
       this.authService
         .register(this.registerForm.value as TUser)
-        .subscribe((res) => {
-          if (res.result) {
-            this.registerForm.reset();
-            this.router.navigate(['login']);
+        .subscribe({
+          next: (res) => {
+            if (res.result) {
+              this.authService.notifyService.openSnackBar("Registration Succeed!", "close", ESnackBarStatus.SUCCESS)
+              this.registerForm.reset();
+              this.router.navigate(['login']);
+            }
+          },
+          error: (err) => {
+            this.authService.notifyService.openSnackBar(err.message, "close", ESnackBarStatus.ERROR)
           }
         });
     }

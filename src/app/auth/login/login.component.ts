@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import { TUser } from 'src/app/types/TUser';
+import { ESnackBarStatus } from 'src/app/enums/ESnackBarStatus';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,45 +12,37 @@ import { TUser } from 'src/app/types/TUser';
 export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   loginForm = this.formBuilder.group({
-    email: this.formBuilder.control('', [
+    email: this.formBuilder.control('test@test.com', [
       Validators.required,
       Validators.email,
     ]),
-    password: this.formBuilder.control('', [
+    password: this.formBuilder.control('Mazoxisti.123', [
       Validators.required,
-      // Validators.pattern(
-      //   "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-      // ),
+      Validators.pattern(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%?&.])[A-Za-z\d$@$!%?&.]{8,}$/gm
+      ),
     ]),
   });
-
-  // getErrorMessage() {
-  //   if (this.email.hasError('required')) {
-  //     return 'You must enter a value';
-  //   }
-
-  //   return this.email.hasError('email') ? 'Not a valid email' : '';
-  // }
 
   proceed() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value as TUser)
-        .subscribe((res: any) => {
-          localStorage.setItem('jwt', res.jwt);
-          this.authService.router.navigate(['/restaurant']);
+        .subscribe({
+          next:
+            (res: any) => {
+              this.authService.notifyService.openSnackBar(`Welcome ${res.user.name}!`, "close", ESnackBarStatus.SUCCESS)
+              localStorage.setItem('jwt', res.jwt);
+              this.authService.router.navigate(['/restaurant']);
+            },
+          error: (err: any) => {
+            this.authService.notifyService.openSnackBar(err.message, "close", ESnackBarStatus.ERROR)
+          }
         });
-      ;
 
-      // console.log(this.loginForm.value);
-      // this.httpClient
-      //   .post('http://localhost:3000/auth/login', this.loginForm.value)
-      //   .subscribe((res) => {
-      //     console.log(res);
-      //   });
     }
   }
 }

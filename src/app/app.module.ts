@@ -14,6 +14,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { RestaurantReviewComponent } from './components/restaurant-review/restaurant-review.component';
 import { RestaurantSingleComponent } from './components/restaurant-single/restaurant-single.component';
+import { SingleReviewComponent } from './components/single-review/single-review.component';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { LoggedInAuthGuard } from './auth/guards/logged-in-auth.guard';
+import { ReviewComponent } from './pages/review/review.component';
 
 // Material Modules
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,10 +34,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { AuthGuard } from './auth/guards/auth.guard';
-import { LoggedInAuthGuard } from './auth/guards/logged-in-auth.guard';
-import { ReviewComponent } from './pages/review/review.component';
-import { SingleReviewComponent } from './components/single-review/single-review.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +69,8 @@ import { SingleReviewComponent } from './components/single-review/single-review.
     MatTableModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   providers: [
     {

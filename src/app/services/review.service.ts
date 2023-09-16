@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { TReview } from '../types/TReview';
 import { Observable, catchError, throwError } from 'rxjs';
 import { localEnviromnemt } from '../constant';
+import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
   api: string = localEnviromnemt ? "http://localhost:3000/api/review" : "https://api.shoufle.ge/api/review";
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, public notifyService: NotifyService) { }
 
   create(review: TReview): Observable<any> {
     return this.httpClient.post<TReview>(`${this.api}`, review).pipe(catchError(this.handleError))
@@ -22,6 +23,8 @@ export class ReviewService {
   getAllWithUser(id: number): Observable<any> {
     return this.httpClient.get<number>(`${this.api}/${id}`).pipe(catchError(this.handleError))
   }
+
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
