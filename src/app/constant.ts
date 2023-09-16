@@ -1,1 +1,1 @@
-export const localEnviromnemt: boolean = true;
+export const localEnviromnemt: boolean = false;
