@@ -14,40 +14,43 @@ export class RegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
-  ) { }
+    private authService: AuthService
+  ) {}
 
   registerForm = this.formBuilder.group({
-    name: this.formBuilder.control('Nika', [Validators.required]),
-    email: this.formBuilder.control('nika123@gmail.com', [
+    name: this.formBuilder.control('', [Validators.required]),
+    email: this.formBuilder.control('', [
       Validators.required,
       Validators.email,
     ]),
     password: this.formBuilder.control('', [
       Validators.required,
-      Validators.pattern(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%?&.])[A-Za-z\d$@$!%?&.]{8,}$/gm
-      ),
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d]{8,}$/gm),
     ]),
   });
 
-
   proceed() {
     if (this.registerForm.valid) {
-      this.authService
-        .register(this.registerForm.value as TUser)
-        .subscribe({
-          next: (res) => {
-            if (res.result) {
-              this.authService.notifyService.openSnackBar("Registration Succeed!", "close", ESnackBarStatus.SUCCESS)
-              this.registerForm.reset();
-              this.router.navigate(['login']);
-            }
-          },
-          error: (err) => {
-            this.authService.notifyService.openSnackBar(err.message, "close", ESnackBarStatus.ERROR)
+      this.authService.register(this.registerForm.value as TUser).subscribe({
+        next: (res) => {
+          if (res.result) {
+            this.authService.notifyService.openSnackBar(
+              'Registration Succeed!',
+              'close',
+              ESnackBarStatus.SUCCESS
+            );
+            this.registerForm.reset();
+            this.router.navigate(['login']);
           }
-        });
+        },
+        error: (err) => {
+          this.authService.notifyService.openSnackBar(
+            err.message,
+            'close',
+            ESnackBarStatus.ERROR
+          );
+        },
+      });
     }
   }
 }

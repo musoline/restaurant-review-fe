@@ -47,7 +47,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RestaurantReviewComponent,
     RestaurantSingleComponent,
     ReviewComponent,
-    SingleReviewComponent
+    SingleReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +70,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
     {
@@ -78,8 +78,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       useClass: AuthInterceptor,
       multi: true,
     },
-    AuthGuard, LoggedInAuthGuard
+    AuthGuard,
+    LoggedInAuthGuard,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
