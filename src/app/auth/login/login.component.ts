@@ -22,7 +22,7 @@ export class LoginComponent {
     ]),
     password: this.formBuilder.control('', [
       Validators.required,
-      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d]{8,}$/gm),
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%?&.]{8,}$/gm),
     ]),
   });
 
